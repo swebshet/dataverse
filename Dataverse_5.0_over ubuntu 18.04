@@ -1,0 +1,337 @@
+This appears to be a non-RedHat Linux system;
+this installation *may* succeed; but we're not making any promises!
+using swebshet.
+
+Checking if the application .war file is available...  Yes, it is!
+
+Welcome to the Dataverse installer.
+You will be guided through the process of setting up a NEW
+instance of the dataverse application
+
+ATTENTION: As of Dataverse v.4.19, we are offering a new, experimental 
+version of the installer script, implemented in Python. It will eventually 
+replace this script (implemented in Perl). Consult the file README_python.txt 
+for more information on how to run it. 
+
+Would you like to exit and use the new installer instead? [y/n] n
+
+Please enter the following configuration values:
+(hit [RETURN] to accept the default value)
+
+Fully Qualified Domain Name of your host:(enter numeric IP address, if FQDN is unavailable)[swebshet] swebshet
+
+Payara service account username:This user will be running the App. Server (Payara5) service on your system.
+ - If this is a dev. environment, this should be your own username; 
+ - In production, we suggest you create the account "dataverse", or use any other unprivileged user account
+:[swebshet] swebshet
+
+App. Server (Payara) Directory: [/usr/local/payara5] /usr/local/payara5
+
+Checking your Glassfish installation.../usr/local/payara5 looks OK!
+
+Administrator email address for this Dataverse:
+(please enter a valid email address!) [] swebshet@gmail.com
+
+SMTP (mail) server (and port) to relay notification messages: [localhost] localhost
+
+OK, we were able to establish connection to the SMTP server you have specified.
+Please note that you *may* need to configure some extra settings before your 
+Dataverse can send email. Please consult the "Mail Host Configuration & Authentication"
+section of the installation guide (http://guides.dataverse.org/en/latest/installation/installation-main.html)
+for more information.
+
+Postgres Server Address: [localhost] localhost
+
+Postgres Server Port: [5432] 5432
+
+Postgres ADMIN password:
+ - We will need this to create the user and database that the Dataverse application will be using.
+ (Hit RETURN if access control is set to "trust" for this connection in pg_hba.conf)
+:[secret] secret
+
+Name of the Postgres Database: [dvndb] dvndb
+
+Name of the Postgres User:
+ - This is the Postgres user that the Dataverse app will be using to talk to the database
+:[dvnapp] dvnapp
+
+Postgres user password: [secret] secret
+
+Remote SOLR indexing service? 
+ - Leave this set to "LOCAL" if the SOLR will be running on the same (this) server.
+ Otherwise, please enter the host AND THE PORT NUMBER of the remote SOLR service, colon-separated
+ (for example: foo.edu:8983)
+: [LOCAL] LOCAL
+
+Rserve Server: [localhost] localhost
+
+Rserve Server Port: [6311] 6311
+
+Rserve User Name: [rserve] rserve
+
+Rserve User Password: [rserve] rserve
+
+Datacite usernameDataCite or EZID username. Only necessary for publishing / minting DOIs.[dataciteuser] dataciteuser
+
+Datacite passwordDataCite or EZID account password.[datacitepassword] datacitepassword
+
+Datacite URLDataCite or EZID URL. Probably https://mds.datacite.org[https://mds.test.datacite.org] https://mds.test.datacite.org
+
+Datacite REST API URLDataCite REST API URL (Make Data Count, /pids API). Probably https://api.datacite.org[https://api.test.datacite.org] https://api.test.datacite.org
+
+
+OK, please confirm what you've entered:
+
+Fully Qualified Domain Name of your host: swebshet
+Payara service account username: swebshet
+App. Server (Payara) Directory: /usr/local/payara5
+Administrator email address for this Dataverse: swebshet@gmail.com
+SMTP (mail) server (and port) to relay notification messages: localhost
+Postgres Server Address: localhost
+Postgres Server Port: 5432
+Postgres ADMIN password: secret
+Name of the Postgres Database: dvndb
+Name of the Postgres User: dvnapp
+Postgres user password: secret
+Remote SOLR indexing service: LOCAL
+Rserve Server: localhost
+Rserve Server Port: 6311
+Rserve User Name: rserve
+Rserve User Password: rserve
+Datacite username: dataciteuser
+Datacite password: datacitepassword
+Datacite URL: https://mds.test.datacite.org
+Datacite REST API URL: https://api.test.datacite.org
+
+Is this correct? [y/n] y
+
+
+Found Postgres psql command, version 9.6.19.
+
+(Using psql version 9.6: /usr/bin/psql)
+Checking if we can talk to Postgres as the admin user...
+Yes, we can!
+
+Configuring Postgres Database:
+
+Creating Postgres user (role) for the DVN:
+done.
+
+Creating Postgres database:
+
+OK, done.
+
+Proceeding with the app. server (Payara5) setup.
+INFO: This system has the CGROUP file /sys/fs/cgroup/memory/memory.limit_in_bytes
+INFO: /sys/fs/cgroup/memory/memory.limit_in_bytes: 9223372036854771712
+
+INFO: CGROUP limit_in_kb =  9007199254740988 [ignoring]
+
+Setting the heap limit for Payara5 to 1440MB. 
+You may need to adjust this setting to better suit 
+your system.
+
+
+Installing the PostgresQL driver for Payara5... done!
+
+*********************
+PLEASE NOTE, SOME OF THE ASADMIN COMMANDS ARE GOING TO FAIL,
+FOR EXAMPLE, IF A CONFIGURATION SETTING THAT WE ARE TRYING
+TO CREATE ALREADY EXISTS; OR IF A JVM OPTION THAT WE ARE
+DELETING DOESN'T. THESE "FAILURES" ARE NORMAL!
+*********************
+
+When/if asadmin asks you to "Enter admin user name",
+it should be safe to hit return and accept the default
+(which is "admin").
+
+Press any key to continue...
+
+k
+openjdk version "1.8.0_265"
+OpenJDK Runtime Environment (build 1.8.0_265-8u265-b01-0ubuntu2~18.04-b01)
+OpenJDK 64-Bit Server VM (build 25.265-b01, mixed mode)
+domain1 not running
+
+Trying to start domain up...
+Waiting for domain1 to start ...................
+Successfully started the domain : domain1
+domain  Location: /usr/local/payara5/glassfish/domains/domain1
+Log File: /usr/local/payara5/glassfish/domains/domain1/logs/server.log
+Admin Port: 4848
+Command start-domain executed successfully.
+Enter admin user name [Enter to accept default]> 
+Admin login information for host [localhost] and port [4848] is being overwritten with credentials provided. This is because the --savelogin option was used during create-domain command.
+Login information relevant to admin user name [admin] for host [localhost] and admin port [4848] stored at [/home/swebshet/.spass] successfully.
+Make sure that this file remains protected. Information stored in this file will be used by administration commands to manage associated domain.
+Command login executed successfully.
+checking glassfish root:/usr/local/payara5
+checking glassfish domain:/usr/local/payara5/glassfish/domains/domain1
+Setting up your app. server (Payara5) to support Dataverse
+Payara directory: /usr/local/payara5
+Domain directory:    /usr/local/payara5/glassfish/domains/domain1
+/usr/local/payara5/bin ~/Documents/Dataverse/dvinstall_5.0/dvinstall
+Trying to start domain domain1 up...
+There is a process already using the admin port 4848 -- it could be another instance of Payara Server or Payara Micro.
+Command start-domain failed.
+remote failure: Application dataverse is not deployed on this target [server]
+Command undeploy failed.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Command create-password-alias executed successfully.
+Command create-password-alias executed successfully.
+Command create-password-alias executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+server-config.network-config.protocols.protocol.http-listener-1.http.comet-support-enabled=true
+Command set executed successfully.
+server-config.network-config.protocols.protocol.http-listener-1.http.request-timeout-seconds=
+Command set executed successfully.
+Connector connection pool jms/__defaultConnectionFactory-Connection-Pool deleted.
+Command delete-connector-connection-pool executed successfully.
+Connector connection pool jms/IngestQueueConnectionFactoryPool created.
+Command create-connector-connection-pool executed successfully.
+Connector resource jms/IngestQueueConnectionFactory created.
+Command create-connector-resource executed successfully.
+Administered object jms/DataverseIngest created.
+Command create-admin-object executed successfully.
+Command create-network-listener executed successfully.
+Deleted 1 option(s)
+Command delete-jvm-options executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+JDBC connection pool dvnDbPool created successfully.
+Command create-jdbc-connection-pool executed successfully.
+resources.jdbc-connection-pool.dvnDbPool.property.password=${ALIAS=db_password_alias}
+Command set executed successfully.
+JDBC resource jdbc/VDCNetDS created successfully.
+Command create-jdbc-resource executed successfully.
+configs.config.server-config.ejb-container.ejb-timer-service.timer-datasource=jdbc/VDCNetDS
+Command set executed successfully.
+Created 1 option(s)
+Command create-jvm-options executed successfully.
+remote failure: A Mail resource named mail/notifyMailSession does not exist.
+Command delete-javamail-resource failed.
+Mail Resource mail/notifyMailSession created.
+Command create-javamail-resource executed successfully.
+Updates done. Restarting...
+Waiting for the domain to stop .
+Command stop-domain executed successfully.
+Waiting for domain1 to start ..............
+Successfully started the domain : domain1
+domain  Location: /usr/local/payara5/glassfish/domains/domain1
+Log File: /usr/local/payara5/glassfish/domains/domain1/logs/server.log
+Admin Port: 4848
+Command start-domain executed successfully.
+~/Documents/Dataverse/dvinstall_5.0/dvinstall
+Payara setup complete
+ሰኞ፣ ሴፕቴምበር 14 ቀን 10:22:06 ጡዋት EAT 2020 ዓ/ም
+
+Copying additional configuration files... done!
+
+Attempting to deploy the application.
+Command line: /usr/local/payara5/bin/asadmin deploy dataverse.war
+Application deployed with name dataverse.
+Command deploy executed successfully.
+Finished configuring Payara and deploying the dataverse application.  
+
+populating the database with reference data:
+
+EXECUTING PSQL COMMAND: PGPASSWORD=secret; export PGPASSWORD; /usr/bin/psql -h localhost -p 5432 -U dvnapp -d dvndb -f reference_data.sql
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+INSERT 0 1
+
+OK, done!
+
+OK, the Dataverse application appears to be running...
+
+using default contact email for root dataverse
+Executing post-deployment setup script setup-all.sh... done!
+Making additional configuration changes...
+
+Executing curl -X PUT -d swebshet@gmail.com http://localhost:8080/api/admin/settings/:SystemEmail
+{"status":"OK","data":{":SystemEmail":"swebshet@gmail.com"}}OK.
+
+
+
+You should now have a running Dataverse instance at
+  http://swebshet:8080
+
+
+
+Your Dataverse has been configured to use DataCite, to register DOI global identifiers in the 
+test name space "10.5072" with the "shoulder" "FK2"
+However, you have to contact DataCite (support@datacite.org) and request a test account, before you 
+can publish datasets. Once you receive the account name and password, add them to your domain.xml,
+as the following two JVM options:
+	<jvm-options>-Ddoi.username=...</jvm-options>
+	<jvm-options>-Ddoi.password=...</jvm-options>
+and restart payara5
+If this is a production Dataverse and you are planning to register datasets as 
+"real", non-test DOIs or Handles, consult the "Persistent Identifiers and Publishing Datasets"
+section of the Installataion guide, on how to configure your Dataverse with the proper registration
+credentials.
+
